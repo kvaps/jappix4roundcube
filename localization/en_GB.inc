@@ -17,4 +17,7 @@ $labels['jappixUsername'] = 'User';
 $labels['jappixDomain'] = 'Domaine';
 $labels['jappixPassword'] = 'Password';
 $labels['jappixSection'] = 'XMPP';
+$labels['task'] = 'Chat';
+$labels['title'] = 'Jappix';
+$labels['manager'] = 'Manage Jappix';
 
