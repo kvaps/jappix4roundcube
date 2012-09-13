@@ -1,0 +1,40 @@
++-------------------------------------------------------------------------+
+|
+|  Author:  Rémi DIONISI (remi.dionisi@yellowsky.fr)
+|  Plugin:  jappix4roundcube
+|  Version: 0.1
+|  Purpose: Mini jappix plugin for roundcube 
+|
++-------------------------------------------------------------------------+
+
+Integrate Mini Jappix in Roundcube
+Mini jappix : https://mini.jappix.com/
+Roundcube : http://www.roundcube.net/
+
+To install :
+
+-1-Put the plugin in roundcube plugin folder :
+
+roundcube
+--plugins
+----jappix4roundcube		this plugin
+------jappix				jappix 0.9.1 (You can try to put a newer version here)
+
+You have a default jappix (Currently 0.9.1) in the folder "jappix".
+
+Go to : youreroundcubeinstance/plugins/jappix4roundcube/jappix/ to configure you-re embedded jappix instance
+(If you need help : https://github.com/jappix/jappix/wiki/JappixApp)
+
+-2- For each user, you have a to configure you're XMPP account in Preferences/XMPP
+
+-username : you're xmpp user
+-password : you're password
+-domaine : you're domaine (For example you can use "gmail.com" or "jabber.org" if you have configure you're jappix instance for it)
+
+-3- Enjoy it!
+
+You still have access to the full interface at youreroundcubeinstance/plugins/jappix4roundcube/jappix/
+If you need to add contact, or other stuff not included in minijappix
+
+If you have other plugin such as planner, you can edit jappix4roundcube.php and add it to task if you want to enable chat in this task.
+
