@@ -11,13 +11,15 @@
  */
  
 class jappix4roundcube extends rcube_plugin {
-  public $task = 'mail|settings|addressbook|jappix';
+  public $task = 'mail|settings|addressbook|jappix|logout';
   
   function init() {
 	$rcmail = rcmail::get_instance();
 	
 	$this->load_config();
 	$this->add_texts('localization/', false);
+	
+	
 	
 	
 	if ($rcmail->config->get('jappix_task')){
@@ -50,10 +52,15 @@ class jappix4roundcube extends rcube_plugin {
 		$this->add_hook('preferences_sections_list', array($this, 'preferences_section'));
 		$this->add_hook('preferences_list', array($this, 'preferences_list'));
 		$this->add_hook('preferences_save', array($this, 'preferences_save'));
+	} else if ($rcmail->task != 'login' && $rcmail->task != 'logout') {
+		if ($rcmail->action == '' || $rcmail->action == 'compose'){
+			$this->include_script('jappix.js');
+		}
+	} else if ($rcmail->task == 'logout') {
+		$this->include_script('jappixLogout.js');
+		return;
 	}
-	if ($rcmail->task != 'login' && $rcmail->task != 'logout' && $rcmail->action == '') {
-		$this->include_script('jappix.js');
-	}
+	
   }
 
   function preferences_section($args) {
