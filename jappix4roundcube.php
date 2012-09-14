@@ -16,14 +16,16 @@ class jappix4roundcube extends rcube_plugin {
   function init() {
 	$rcmail = rcmail::get_instance();
 	
-	$this->register_task('jappix');
-	
+	$this->load_config();
 	$this->add_texts('localization/', false);
-
-    $this->register_action('index', array($this, 'action'));
-    $this->register_action('redirect', array($this, 'redirect'));
 	
-	$this->add_button(array(
+	
+	if ($rcmail->config->get('jappix_task')){
+		$this->register_task('jappix');
+		$this->register_action('index', array($this, 'action'));
+		$this->register_action('redirect', array($this, 'redirect'));
+	
+		$this->add_button(array(
 	        'command' => 'jappix',
 	        'class'	=> 'button-jappix4roundcube',
 	        'classsel' => 'button-jappix4roundcube button-selected',                                                                                                               
@@ -31,8 +33,13 @@ class jappix4roundcube extends rcube_plugin {
 	        'label'	=> 'jappix4roundcube.task',
             ), 'taskbar');
 
+	}
   
-	$this->include_script('jappix/php/get.php?l=en&amp;t=js&amp;g=mini.xml');
+	if ($rcmail->config->get('jappix_embedded')){
+		$this->include_script('jappix/php/get.php?l=en&amp;t=js&amp;g=mini.xml');
+	} else {
+		$this->include_script($rcmail->config->get('jappix_url').'/php/get.php?l=en&amp;t=js&amp;g=mini.xml');
+	}
 	$this->include_stylesheet('jappix4roundcube.css');
 	
 	$rcmail->output->set_env('jabber_username', $rcmail->config->get('jabber_username'));
@@ -62,6 +69,7 @@ class jappix4roundcube extends rcube_plugin {
     if ($args['section'] == 'jabber') {
 		$rcmail = rcmail::get_instance();
 		$this->add_texts('localization');
+		$this->load_config();
 
 		$jabber_username = $rcmail->config->get('jabber_username');
 		$input = new html_inputfield(array('name' => '_jabber_username', 'id' => $field_id, 'size' => 25));
@@ -84,10 +92,17 @@ class jappix4roundcube extends rcube_plugin {
 			'content' => $input->show($jabber_domain),
 		);
 		
-		$args['blocks']['jabber']['options']['jabber_manager'] = array(
-			'title' => html::label($field_id, Q($this->gettext('manager'))),
-			'content' => '<a target=\'_blank\' href=\'plugins/jappix4roundcube/jappix/?m=manager\'>'.Q($this->gettext('manager')).'</a>',
-		);
+		if ($rcmail->config->get('jappix_embedded')){
+			$args['blocks']['jabber']['options']['jabber_manager'] = array(
+				'title' => html::label($field_id, Q($this->gettext('manager'))),
+				'content' => '<a target=\'_blank\' href=\'plugins/jappix4roundcube/jappix/?m=manager\'>'.Q($this->gettext('manager')).'</a>',
+			);
+		} else {
+			$args['blocks']['jabber']['options']['jabber_manager'] = array(
+				'title' => html::label($field_id, Q($this->gettext('manager'))),
+				'content' => '<a target=\'_blank\' href=\''.$rcmail->config->get('jappix_url').'/?m=manager\'>'.Q($this->gettext('manager')).'</a>',
+			);
+		}
     }
     return $args;
   }
@@ -121,7 +136,12 @@ class jappix4roundcube extends rcube_plugin {
 
         $this->load_config();
 
-        $src  = 'plugins/jappix4roundcube/jappix/';//$rcmail->config->get('jappix4roundcube_url');
+		if ($rcmail->config->get('jappix_embedded')){
+			$src  = 'plugins/jappix4roundcube/jappix/';
+		} else {
+			$src  = $rcmail->config->get('jappix_url').'/';
+		}
+		
         $user = $rcmail->config->get('jabber_username');
         $pass = $rcmail->config->get('jabber_password');
 		$domaine = $rcmail->config->get('jabber_domain');
