@@ -52,7 +52,9 @@ class jappix4roundcube extends rcube_plugin {
 		$this->add_hook('preferences_sections_list', array($this, 'preferences_section'));
 		$this->add_hook('preferences_list', array($this, 'preferences_list'));
 		$this->add_hook('preferences_save', array($this, 'preferences_save'));
-	} else if ($rcmail->task != 'login' && $rcmail->task != 'logout') {
+	}
+	
+	if ($rcmail->task != 'login' && $rcmail->task != 'logout' &&$rcmail->task != 'jappix') {
 		if ($rcmail->action == '' || $rcmail->action == 'compose'){
 			$this->include_script('jappix.js');
 		}
@@ -154,7 +156,9 @@ class jappix4roundcube extends rcube_plugin {
 		$domaine = $rcmail->config->get('jabber_domain');
 
         $src = $src.'?u='.$user.'@'.$domaine.'&h=1&q='.$pass;
-
+		
+		$this->include_script('jappix/js/httpauth.js');
+		$this->include_script('jappixFullLogin.js');
         return '<iframe id="jappix4roundcubeframe" width="100%" height="100%" frameborder="0"'
             .' src="' . $src. '"></iframe>';
     }
