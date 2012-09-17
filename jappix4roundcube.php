@@ -55,7 +55,7 @@ class jappix4roundcube extends rcube_plugin {
 	}
 	
 	if ($rcmail->task != 'jappix') {
-		if ($rcmail->action == '' || $rcmail->action == 'compose'){
+		if ($rcmail->action == '' || $rcmail->action == 'compose' || $rcmail->action == 'show'){
 			$this->include_script('jappix.js');
 		}
 	}
