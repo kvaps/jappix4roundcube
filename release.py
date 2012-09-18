@@ -23,13 +23,10 @@ def excluded_files(myfile):
 
 def main():
     
-    #version = input('Version?')
-    #user = input('User?')
-    #password = input('password?')
-    
-    version = '0.2.1'
-    user = 'remi.dionisi@gmail.com'
-    password = 'tN5yw3XZ3pw3'
+    version = input('Version?')
+    user = ''#input('User?')
+    password = ''#input('password?')
+
     project_name='jappix4roundcube'
     print('0')
     labels=['Featured','Type-Installer','OpSys-All']
