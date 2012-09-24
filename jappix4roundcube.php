@@ -18,8 +18,7 @@ class jappix4roundcube extends rcube_plugin {
 	
 	$this->load_config();
 	$this->add_texts('localization/', false);
-	
-	
+	$this->require_plugin('jqueryui');
 	
 	
 	if ($rcmail->config->get('jappix_task')){
