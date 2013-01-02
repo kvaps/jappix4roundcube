@@ -16,7 +16,6 @@ $labels = array();
 $labels['jappixUsername'] = 'User (leave empty to disable)';
 $labels['jappixDomain'] = 'Domaine';
 $labels['jappixPassword'] = 'Password';
-$labels['jappixDisable'] = 'Disable';
 $labels['jappixSection'] = 'XMPP';
 $labels['task'] = 'Chat';
 $labels['title'] = 'Jappix';
