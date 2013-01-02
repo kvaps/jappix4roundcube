@@ -46,9 +46,7 @@ def main():
     shutil.move('jappix','jappix.bak')
     print('Extracting '+jappix+' to jappix dir')
     
-    sourceZip = zipfile.ZipFile(jappix, 'r')
-    sourceZip.extractall()
-    sourceZip.close()
+    
 
     print('Remplace dev config by config.inc.php.external.dist')
     shutil.copy('config.inc.php.external.dist','config.inc.php')
@@ -58,8 +56,9 @@ def main():
     tar_ext.add('.',exclude=excluded_files)
     tar_ext.close()
 
-    print('Removing extracted jappix')
-    shutil.rmtree('jappix')
+    sourceZip = zipfile.ZipFile(jappix, 'r')
+    sourceZip.extractall()
+    sourceZip.close()
 
     print('Remplace dev config by config.inc.php.embedded.dist')
     shutil.copy('config.inc.php.embedded.dist','config.inc.php')
@@ -67,6 +66,9 @@ def main():
     tar_emb = tarfile.open('jappix4roundcube-plugin-jappixembedded-v'+version+'.tar', 'w')
     tar_emb.add('.',exclude=excluded_files)
     tar_emb.close()
+    
+    print('Removing extracted jappix')
+    shutil.rmtree('jappix')
 
     print('Putting bak archived jappix')
     shutil.move('jappix.bak','jappix')
