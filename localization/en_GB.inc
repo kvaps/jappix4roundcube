@@ -7,15 +7,16 @@
  | Licensed under the GNU General Public License                         |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Rémi Dionisi  <Unknown>                                       |
+ | Author: Remi Dionisi  <Unknown>                                       |
  +-----------------------------------------------------------------------+
  @version $Id$
 */
 
 $labels = array();
-$labels['jappixUsername'] = 'User';
+$labels['jappixUsername'] = 'User (leave empty to disable)';
 $labels['jappixDomain'] = 'Domaine';
 $labels['jappixPassword'] = 'Password';
+$labels['jappixDisable'] = 'Disable';
 $labels['jappixSection'] = 'XMPP';
 $labels['task'] = 'Chat';
 $labels['title'] = 'Jappix';

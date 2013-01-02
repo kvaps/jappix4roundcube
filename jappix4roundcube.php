@@ -21,11 +21,10 @@ class jappix4roundcube extends rcube_plugin {
 	$this->require_plugin('jqueryui');
 	
 	
-	if ($rcmail->config->get('jappix_task')){
+	if ($rcmail->config->get('jappix_task') && $rcmail->config->get('jabber_username') !=''){
 		$this->register_task('jappix');
 		$this->register_action('index', array($this, 'action'));
 		$this->register_action('redirect', array($this, 'redirect'));
-	
 		$this->add_button(array(
 	        'command' => 'jappix',
 	        'class'	=> 'button-jappix4roundcube',
@@ -33,7 +32,6 @@ class jappix4roundcube extends rcube_plugin {
 	        'innerclass' => 'button-inner',                                                                                                                                
 	        'label'	=> 'jappix4roundcube.task',
             ), 'taskbar');
-
 	}
   
 	if ($rcmail->config->get('jappix_embedded')){
@@ -53,7 +51,7 @@ class jappix4roundcube extends rcube_plugin {
 		$this->add_hook('preferences_save', array($this, 'preferences_save'));
 	}
 	
-	if ($rcmail->task != 'jappix') {
+	if ($rcmail->task != 'jappix' && $rcmail->config->get('jabber_username') !='') {
 		if ($rcmail->action == '' || $rcmail->action == 'compose' || $rcmail->action == 'show'){
 			$this->include_script('jappix.js');
 		}
