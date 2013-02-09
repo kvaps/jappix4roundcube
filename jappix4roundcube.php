@@ -1,4 +1,4 @@
-﻿<?php
+ <?php
 /**
  * jappix4roundcube
  *
@@ -35,9 +35,9 @@ class jappix4roundcube extends rcube_plugin {
 	}
   
 	if ($rcmail->config->get('jappix_embedded')){
-		$this->include_script('jappix/php/get.php?l=en&amp;t=js&amp;g=mini.xml');
+		$this->include_script('jappix/php/get.php?l=en&t=js&g=mini.xml');
 	} else {
-		$this->include_script($rcmail->config->get('jappix_url').'/php/get.php?l=en&amp;t=js&amp;g=mini.xml');
+		$this->include_script($rcmail->config->get('jappix_url').'/php/get.php?l=en&t=js&g=mini.xml');
 	}
 	$this->include_stylesheet('jappix4roundcube.css');
 	
