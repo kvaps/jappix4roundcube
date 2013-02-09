@@ -1,4 +1,4 @@
- <?php
+<?php
 /**
  * jappix4roundcube
  *
@@ -15,7 +15,7 @@ class jappix4roundcube extends rcube_plugin {
   
   function init() {
 	$rcmail = rcmail::get_instance();
-	
+
 	$this->load_config();
 	$this->add_texts('localization/', false);
 	$this->require_plugin('jqueryui');
@@ -52,7 +52,7 @@ class jappix4roundcube extends rcube_plugin {
 	}
 	
 	if ($rcmail->task != 'jappix' && $rcmail->config->get('jabber_username') !='') {
-		if ($rcmail->action == '' || $rcmail->action == 'compose' || $rcmail->action == 'show'){
+		if ($rcmail->action == '' || $rcmail->action == 'compose' || ($rcmail->action == 'show' && $rcmail->task == 'mail')){
 			$this->include_script('jappix.js');
 		}
 	}

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 // If fou want to use an extenal jappix, please provide jappix url
 $rcmail_config['jappix_embedded'] = true;
