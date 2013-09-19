@@ -7,7 +7,7 @@
  | Licensed under the GNU General Public License                         |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Remi Dionisi  <Unknown>                                       |
+ | Author: Remi Dionisi  <Unknown>          thanks to miroslav.kodet     |
  +-----------------------------------------------------------------------+
  @version $Id$
 */
