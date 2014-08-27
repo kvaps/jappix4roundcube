@@ -32,7 +32,7 @@ def main():
     labels=['Featured','Type-Installer','OpSys-All']
     summary_emb='jappix4roundcube plugin v'+version+', with embedded jappix'
     summary_ext='jappix4roundcube plugin v'+version+', without embedded jappix'
-    jappix='jappix-0.9.1-nemesis-alpha-1.zip'
+    jappix='jappix-1.1.0-primo.zip'
     #description_emb='Including '+jappix
     #description_ext='If you already have a jappix installed or wan\'t to use a public one'
 

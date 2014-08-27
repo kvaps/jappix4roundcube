@@ -35,9 +35,9 @@ class jappix4roundcube extends rcube_plugin {
 	}
   
 	if ($rcmail->config->get('jappix_embedded')){
-		$this->include_script('jappix/php/get.php?l=en&t=js&g=mini.xml');
+		$this->include_script('jappix/server/get.php?l=en&t=js&g=mini.xml');
 	} else {
-		$this->include_script($rcmail->config->get('jappix_url').'/php/get.php?l=en&t=js&g=mini.xml');
+		$this->include_script($rcmail->config->get('jappix_url').'/server/get.php?l=en&t=js&g=mini.xml');
 	}
 	$this->include_stylesheet('jappix4roundcube.css');
 	
@@ -140,7 +140,7 @@ class jappix4roundcube extends rcube_plugin {
         $this->load_config();
 
 		if ($rcmail->config->get('jappix_embedded')){
-			$src  = 'plugins/jappix4roundcube/jappix/';
+			$src  = 'plugins/jappix4roundcube/jappix/index.php';
 		} else {
 			$src  = $rcmail->config->get('jappix_url').'/';
 		}
@@ -153,8 +153,7 @@ class jappix4roundcube extends rcube_plugin {
 		
 		$this->include_script('jappix/js/httpauth.js');
 		$this->include_script('jappixFullLogin.js');
-        return '<iframe id="jappix4roundcubeframe" width="100%" height="100%" frameborder="0"'
-            .' src="' . $src. '"></iframe>';
+	return '<script type="text/javascript"> window.location.href ="' . $src. '"</script>';
     }
 }
 
