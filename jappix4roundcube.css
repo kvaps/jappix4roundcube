@@ -1,0 +1,17 @@
+﻿#sections-table #rcmrowjabber td.section{
+background-position: 6px -478px;
+}
+
+#taskbar a.button-jappix4roundcube span.button-inner
+{
+  background: url(chat.png) 5px 3px no-repeat;
+  height: 18px;
+}
+
+#taskbar a.button-jappix4roundcube:hover span.button-inner,                                                                                                                      
+#taskbar a.button-jappix4roundcube.button-selected span.button-inner
+{
+  background: url(chat.png) 5px -20px no-repeat;
+  height: 18px;
+}
+
