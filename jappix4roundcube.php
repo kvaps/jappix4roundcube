@@ -153,7 +153,12 @@ class jappix4roundcube extends rcube_plugin {
 		
 		$this->include_script('jappix/js/httpauth.js');
 		$this->include_script('jappixFullLogin.js');
-	return '<script type="text/javascript"> window.location.href ="' . $src. '"</script>';
+	    
+        if ($rcmail->config->get('jappix_iframe')){
+            return '<iframe id="jappix4roundcubeframe" width="100%" height="100%" frameborder="0" src="' . $src. '"></iframe>';
+        } else {
+        	return '<script type="text/javascript"> window.location.href ="' . $src. '";</script>';
+        } 
     }
 }
 

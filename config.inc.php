@@ -7,4 +7,7 @@ $rcmail_config['jappix_url'] = 'https://jappix.com';
 // Enables full jappix mode
 $rcmail_config['jappix_task'] = true;
 
+// Show jappix in iframe
+$rcmail_config['jappix_iframe'] = true;
+
 ?>
