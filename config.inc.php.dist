@@ -11,7 +11,7 @@ $rcmail_config['jappix_task'] = true;
 $rcmail_config['jappix_iframe'] = true;
 
 // Use roundcube creditionals (enables autologin)
-$rcmail_config['jappix_use_autologin'] = true;
+$rcmail_config['jappix_use_autologin'] = false;
 
 
 // =========== Autologin configuration ===========
