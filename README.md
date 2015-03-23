@@ -3,6 +3,13 @@ jappix4roundcube
 
 My version Jappix plugin for roundcube
 
+### Changes
+
+Added features:
+* Autologin (uses roundcube creditionals)
+* Enable / Disable jappix mini
+* Show jappix in iframe
+* Changed skin and icon now looks good
 
 ### Installation
 
