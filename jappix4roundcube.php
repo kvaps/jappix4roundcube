@@ -19,6 +19,7 @@ class jappix4roundcube extends rcube_plugin {
 	$this->load_config();
 	$this->add_texts('localization/', false);
 	$this->require_plugin('jqueryui');
+    $this->include_stylesheet('jappix4roundcube.css');
 	
 	
 	if ($rcmail->config->get('jappix_task') && $rcmail->config->get('jabber_username') !=''){
@@ -33,35 +34,37 @@ class jappix4roundcube extends rcube_plugin {
 	        'label'	=> 'jappix4roundcube.task',
             ), 'taskbar');
 	}
-  
-	if ($rcmail->config->get('jappix_embedded')){
-		$this->include_script('jappix/server/get.php?l=en&t=js&g=mini.xml');
-	} else {
-		$this->include_script($rcmail->config->get('jappix_url').'/server/get.php?l=en&t=js&g=mini.xml');
-	}
-	$this->include_stylesheet('jappix4roundcube.css');
-	
-	if ($rcmail->config->get('jappix_use_autologin')){
-    	$rcmail->output->set_env('jabber_username', $rcmail->config->get('jappix_auto_username'));
-	    $rcmail->output->set_env('jabber_domain', $rcmail->config->get('jappix_auto_domain'));
-    	$rcmail->output->set_env('jabber_password', $rcmail->decrypt($_SESSION['password']));
-    } else {
-    	$rcmail->output->set_env('jabber_username', $rcmail->config->get('jabber_username'));
-    	$rcmail->output->set_env('jabber_domain', $rcmail->config->get('jabber_domain'));
-    	$rcmail->output->set_env('jabber_password', $rcmail->config->get('jabber_password'));
+    
+    if ($rcmail->config->get('jappix_mini')){  
+    	if ($rcmail->config->get('jappix_embedded')){
+    		$this->include_script('jappix/server/get.php?l=en&t=js&g=mini.xml');
+    	} else {
+    		$this->include_script($rcmail->config->get('jappix_url').'/server/get.php?l=en&t=js&g=mini.xml');
+    	}
+    	
+    	if ($rcmail->config->get('jappix_use_autologin')){
+        	$rcmail->output->set_env('jabber_username', $rcmail->config->get('jappix_auto_username'));
+    	    $rcmail->output->set_env('jabber_domain', $rcmail->config->get('jappix_auto_domain'));
+        	$rcmail->output->set_env('jabber_password', $rcmail->decrypt($_SESSION['password']));
+        } else {
+        	$rcmail->output->set_env('jabber_username', $rcmail->config->get('jabber_username'));
+        	$rcmail->output->set_env('jabber_domain', $rcmail->config->get('jabber_domain'));
+        	$rcmail->output->set_env('jabber_password', $rcmail->config->get('jabber_password'));
+        }
+    	
+        if ($rcmail->task != 'jappix' && $rcmail->config->get('jabber_username') !='') {
+    		if ($rcmail->action == '' || $rcmail->action == 'compose' || ($rcmail->action == 'show' && $rcmail->task == 'mail')){
+    			$this->include_script('jappix.js');
+    		}
+    	}
     }
 
-	if ($rcmail->task == 'settings' && !$rcmail->config->get('jappix_use_autologin')) {
+   	if ($rcmail->task == 'settings' && !$rcmail->config->get('jappix_use_autologin')) {
 		$this->add_hook('preferences_sections_list', array($this, 'preferences_section'));
 		$this->add_hook('preferences_list', array($this, 'preferences_list'));
 		$this->add_hook('preferences_save', array($this, 'preferences_save'));
 	}
-	
-	if ($rcmail->task != 'jappix' && $rcmail->config->get('jabber_username') !='') {
-		if ($rcmail->action == '' || $rcmail->action == 'compose' || ($rcmail->action == 'show' && $rcmail->task == 'mail')){
-			$this->include_script('jappix.js');
-		}
-	}
+	 
 	
   }
 
