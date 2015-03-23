@@ -41,11 +41,17 @@ class jappix4roundcube extends rcube_plugin {
 	}
 	$this->include_stylesheet('jappix4roundcube.css');
 	
-	$rcmail->output->set_env('jabber_username', $rcmail->config->get('jabber_username'));
-	$rcmail->output->set_env('jabber_domain', $rcmail->config->get('jabber_domain'));
-	$rcmail->output->set_env('jabber_password', $rcmail->config->get('jabber_password'));
-	
-	if ($rcmail->task == 'settings') {
+	if ($rcmail->config->get('jappix_use_autologin')){
+    	$rcmail->output->set_env('jabber_username', $rcmail->config->get('jappix_auto_username'));
+	    $rcmail->output->set_env('jabber_domain', $rcmail->config->get('jappix_auto_domain'));
+    	$rcmail->output->set_env('jabber_password', $rcmail->decrypt($_SESSION['password']));
+    } else {
+    	$rcmail->output->set_env('jabber_username', $rcmail->config->get('jabber_username'));
+    	$rcmail->output->set_env('jabber_domain', $rcmail->config->get('jabber_domain'));
+    	$rcmail->output->set_env('jabber_password', $rcmail->config->get('jabber_password'));
+    }
+
+	if ($rcmail->task == 'settings' && !$rcmail->config->get('jappix_use_autologin')) {
 		$this->add_hook('preferences_sections_list', array($this, 'preferences_section'));
 		$this->add_hook('preferences_list', array($this, 'preferences_list'));
 		$this->add_hook('preferences_save', array($this, 'preferences_save'));
@@ -145,10 +151,15 @@ class jappix4roundcube extends rcube_plugin {
 			$src  = $rcmail->config->get('jappix_url').'/';
 		}
 		
+	if ($rcmail->config->get('jappix_use_autologin')){
+    	$user = $rcmail->config->get('jappix_auto_username');
+    	$pass = $rcmail->decrypt($_SESSION['password']);
+	    $domaine = $rcmail->config->get('jappix_auto_domain');
+    } else {
         $user = $rcmail->config->get('jabber_username');
         $pass = $rcmail->config->get('jabber_password');
 		$domaine = $rcmail->config->get('jabber_domain');
-
+    }
         $src = $src.'?u='.$user.'@'.$domaine.'&h=1&q='.$pass;
 		
 //		$this->include_script('jappix/js/httpauth.js');
