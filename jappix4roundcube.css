@@ -4,14 +4,14 @@ background-position: 6px -478px;
 
 #taskbar a.button-jappix4roundcube span.button-inner
 {
-  background: url(chat.png) 5px 3px no-repeat;
-  height: 18px;
+  background: url(chat.png) 0px 0px no-repeat;
+  height: 20px;
 }
 
 #taskbar a.button-jappix4roundcube:hover span.button-inner,                                                                                                                      
 #taskbar a.button-jappix4roundcube.button-selected span.button-inner
 {
-  background: url(chat.png) 5px -20px no-repeat;
-  height: 18px;
+  background: url(chat.png) 0px -30px no-repeat;
+  height: 20px;
 }
 
