@@ -163,7 +163,7 @@ class jappix4roundcube extends rcube_plugin {
         $pass = $rcmail->config->get('jabber_password');
 		$domaine = $rcmail->config->get('jabber_domain');
     }
-        $src = $src.'?u='.$user.'@'.$domaine.'&h=1&q='.$pass;
+        $src = $src.'?u='.urlencode($user).'@'.urlencode($domaine).'&h=1&q='.urlencode($pass);
 		
 //		$this->include_script('jappix/js/httpauth.js');
 //		$this->include_script('jappixFullLogin.js');
