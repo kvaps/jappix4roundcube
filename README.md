@@ -25,17 +25,20 @@ If you want, clone the main jappix project into this plugin folder
 
     git clone https://github.com/jappix/jappix jappix4roundcube/jappix/
 
-You can customize the jappix design for the standard roundcube larry-skin  
+    cd jappix4roundcube/
 
-    cp -r jappix4roundcube/jappix.larry-skin/* jappix4roundcube/jappix
+You can customize the jappix design for the standard roundcube larry-skin using my patch 
+
+    mkdir -p jappix/store/backgrounds/ && cp ../../skins/larry/images/linen.jpg jappix/store/backgrounds/linen.jpg
+    patch -p0 <larry-skin.patch
 
 Сhange owner for jappix folder, recursive
 
-    chown www-data:www-data jappix4roundcube/jappix -R
+    chown www-data:www-data jappix -R
 
 Create new config.inc.php from config.inc.php.dist
 
-    cp jappix4roundcube/config.inc.php.dist jappix4roundcube/config.inc.php
+    cp config.inc.php.dist config.inc.php
 
 Edit jappix4roundcube/config.inc.php
 
