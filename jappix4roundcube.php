@@ -22,7 +22,7 @@ class jappix4roundcube extends rcube_plugin {
     $this->include_stylesheet('jappix4roundcube.css');
 	
 	
-	if ($rcmail->config->get('jappix_task') && $rcmail->config->get('jabber_username') !=''){
+	if ($rcmail->config->get('jappix_task') && ($rcmail->config->get('jabber_username') !='' || $rcmail->config->get('jappix_use_autologin'))){
 		$this->register_task('jappix');
 		$this->register_action('index', array($this, 'action'));
 		$this->register_action('redirect', array($this, 'redirect'));
@@ -52,7 +52,7 @@ class jappix4roundcube extends rcube_plugin {
         	$rcmail->output->set_env('jabber_password', $rcmail->config->get('jabber_password'));
         }
     	
-        if ($rcmail->task != 'jappix' && $rcmail->config->get('jabber_username') !='') {
+        if ($rcmail->task != 'jappix' && ($rcmail->config->get('jabber_username') !='' || $rcmail->config->get('jappix_use_autologin'))) {
     		if ($rcmail->action == '' || $rcmail->action == 'compose' || ($rcmail->action == 'show' && $rcmail->task == 'mail')){
     			$this->include_script('jappix.js');
     		}
